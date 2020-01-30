@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>广度优先搜索&amp;深度优先搜索 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="广度优先搜索 Breadth-First-Search在树（图/状态集）中寻找特定节点以根节点逐层扩散
+模板
+12345678910111213141516def BFS(graph, start,,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">广度优先搜索&深度优先搜索</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">广度优先搜索&深度优先搜索</h1>
+        <div class="stuff">
+            <span>一月 19, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" rel="tag">广度优先搜索</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" rel="tag">深度优先搜索</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>广度优先搜索 Breadth-First-Search<br>在树（图/状态集）中寻找特定节点<br>以根节点逐层扩散</p>
+<p>模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def BFS(graph, start, end):</span><br><span class="line"></span><br><span class="line">	queue &#x3D; [] &#x2F;&#x2F;队列实现</span><br><span class="line">	queue.append([start]) </span><br><span class="line">	visited.add(start) &#x2F;&#x2F;判重集合set 记录节点是否被访问过</span><br><span class="line">					   &#x2F;&#x2F;树不会重复 图或状态集可能会重复</span><br><span class="line">	while queue:</span><br><span class="line">		node &#x3D; queue.pop()</span><br><span class="line">		visited.add(node)</span><br><span class="line">		</span><br><span class="line">		process(node)</span><br><span class="line">		nodes &#x3D; generate_related_nodes(node) &#x2F;&#x2F;找node的后继节点并且判断后继节点没有被访问过</span><br><span class="line">		queue.push(nodes)</span><br><span class="line"></span><br><span class="line">	# other processing work</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>深度优先搜索 Depth-First-Search<br>在树（图/状态集）中寻找特定节点<br>一根经到底 进行回溯</p>
+<p>模板<br>递归写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">visited &#x3D; set()</span><br><span class="line">def DFS(node, visited):</span><br><span class="line"></span><br><span class="line">	visited.add(start)</span><br><span class="line">	# process current node here.</span><br><span class="line">	...</span><br><span class="line">	for next_node in node.children():</span><br><span class="line">		if not next_node in visited:</span><br><span class="line">			dfs(next_node, visited)</span><br></pre></td></tr></table></figure>
+
+<p>模板<br>非递归写法 一般就用递归写法 递归的实现就是堆栈</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def DFS(self, tree):</span><br><span class="line"></span><br><span class="line">	if tree.root is None:</span><br><span class="line">		return []</span><br><span class="line"></span><br><span class="line">	visited, stack &#x3D; [], [tree.root]</span><br><span class="line"></span><br><span class="line">	while stack:</span><br><span class="line">		node &#x3D; stack.pop()</span><br><span class="line">		visited.add(node)</span><br><span class="line"></span><br><span class="line">		process(node)</span><br><span class="line">		nodes &#x3D; generate_related_nodes(node)</span><br><span class="line">		stack.push(nodes)</span><br><span class="line">	</span><br><span class="line">	# other processing work</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<h3 id="102-二叉树的层次遍历"><a href="#102-二叉树的层次遍历" class="headerlink" title="102.二叉树的层次遍历"></a><a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">102.二叉树的层次遍历</a></h3><p>1.BFS O(n) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;</span><br><span class="line">        </span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        if(root &#x3D;&#x3D; null)</span><br><span class="line">            return  res;</span><br><span class="line">        </span><br><span class="line">        Queue&lt;TreeNode&gt; q &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int levelSize &#x3D; q.size();</span><br><span class="line">            List&lt;Integer&gt; currLevel &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">            for(int i &#x3D; 0; i &lt; levelSize; i++)&#123;</span><br><span class="line">                TreeNode currNode &#x3D; q.poll();</span><br><span class="line">                currLevel.add(currNode.val);</span><br><span class="line">                if(currNode.left !&#x3D; null)</span><br><span class="line">                    q.add(currNode.left);</span><br><span class="line">                if(currNode.right !&#x3D; null)</span><br><span class="line">                    q.add(currNode.right);</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(currLevel);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.DFS O(n) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;</span><br><span class="line">        </span><br><span class="line">        if(root &#x3D;&#x3D; null)</span><br><span class="line">            return  res;</span><br><span class="line">        dfs(root, 0);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void dfs(TreeNode node, int level)&#123;</span><br><span class="line">        if(node &#x3D;&#x3D; null)</span><br><span class="line">            return;</span><br><span class="line">        if(res.size() &lt; level + 1)&#123;</span><br><span class="line">            List&lt;Integer&gt; currLevel &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">            res.add(currLevel);</span><br><span class="line">        &#125;</span><br><span class="line">        res.get(level).add(node.val);</span><br><span class="line">        dfs(node.left, level+1);</span><br><span class="line">        dfs(node.right, level+1);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="104-二叉树的最大深度"><a href="#104-二叉树的最大深度" class="headerlink" title="104.二叉树的最大深度"></a><a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="noopener">104.二叉树的最大深度</a></h3><p>1.DFS 分治 O(n) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int maxDepth(TreeNode root) &#123;</span><br><span class="line">        return root &#x3D;&#x3D; null ? 0 : 1 + Math.max(maxDepth(root.left), maxDepth(root.right));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.BFS O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111.二叉树的最小深度"></a><a href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="noopener">111.二叉树的最小深度</a></h3><p>1.DFS 分治 O(n) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int minDepth(TreeNode root) &#123;</span><br><span class="line">        if(root &#x3D;&#x3D; null)</span><br><span class="line">            return 0;</span><br><span class="line"></span><br><span class="line">        if(root.left &#x3D;&#x3D; null)</span><br><span class="line">            return 1 + minDepth(root.right);</span><br><span class="line"></span><br><span class="line">        if(root.right &#x3D;&#x3D; null)</span><br><span class="line">            return 1 + minDepth(root.left);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;divide and  conquer</span><br><span class="line">        int minLeft &#x3D; minDepth(root.left);</span><br><span class="line">        int minRight &#x3D; minDepth(root.right);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;process subproblem&#39;s results</span><br><span class="line">        int res &#x3D; 1 + Math.min(minLeft, minRight);</span><br><span class="line"></span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.BFS O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22.括号生成"></a><a href="https://leetcode-cn.com/problems/generate-parentheses/" target="_blank" rel="noopener">22.括号生成</a></h3><p>1.数学归纳法 不好写<br>2.Recursion搜索 O(2^2n) /DFS</p>
+<p>3.Recursion搜索 + 剪枝 O(2^n)<br>改进2：a. 局部不合法，不再递归 b. 记录左右括号用了多少</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        </span><br><span class="line">        List&lt;String&gt; result &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        generateOneByOne(result, &quot;&quot;, n, n);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void generateOneByOne(List res, String subStr, int leftNum, int rightNum) &#123;</span><br><span class="line">        if (leftNum &#x3D;&#x3D; 0 &amp;&amp; rightNum &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            res.add(subStr);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">           </span><br><span class="line">        if (leftNum &gt; 0) &#123;</span><br><span class="line">            generateOneByOne(res, subStr + &quot;(&quot;, leftNum - 1, rightNum);</span><br><span class="line">        &#125;</span><br><span class="line">        if (rightNum &gt; leftNum) &#123;</span><br><span class="line">            generateOneByOne(res, subStr + &quot;)&quot;, leftNum, rightNum - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#102-二叉树的层次遍历"><span class="toc-number">1.</span> <span class="toc-text">102.二叉树的层次遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#104-二叉树的最大深度"><span class="toc-number">2.</span> <span class="toc-text">104.二叉树的最大深度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#111-二叉树的最小深度"><span class="toc-number">3.</span> <span class="toc-text">111.二叉树的最小深度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-括号生成"><span class="toc-number">4.</span> <span class="toc-text">22.括号生成</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

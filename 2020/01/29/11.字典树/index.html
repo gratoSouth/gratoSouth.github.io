@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>字典树 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="字典树 Trie基本结构Trie树，即字典树，又称单词查找树或键树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计和排序大量的字符串（但不限于字符串），所以经常被搜索引擎系统用于文本词频统计,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">字典树</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">字典树</h1>
+        <div class="stuff">
+            <span>一月 29, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/" rel="tag">字典树</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>字典树 Trie<br>基本结构<br>Trie树，即字典树，又称单词查找树或键树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计和排序大量的字符串（但不限于字符串），所以经常被搜索引擎系统用于文本词频统计。<br>他的优点是： 最大限度地减少无谓的字符串比较，查询效率比哈希表高。</p>
+<p>核心思想<br>Trie地核心思想是空间换时间。利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。</p>
+<p>基本性质<br>1.根节点不包含字符，除根节点外每一个节点都只包含有一个字符。<br>2.从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串。<br>3.每个节点的所有子节点包含的字符都不相同。</p>
+<p>数据结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static final int ALPHABET_SIZE &#x3D; 256；</span><br><span class="line"></span><br><span class="line">static class TrieNode &#123; </span><br><span class="line">	TrieNode[] children &#x3D; new TrieNode[ALPHABET_SIZE];</span><br><span class="line">	boolean isEndOfWord &#x3D; false;</span><br><span class="line">	TrieNode () &#123;</span><br><span class="line">		isEndOfWord &#x3D; false;</span><br><span class="line">		for (int i &#x3D; 0; i &lt; ALPHABET_SIZE; i++) </span><br><span class="line">			children[i] &#x3D; null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="208-实现-Trie-前缀树"><a href="#208-实现-Trie-前缀树" class="headerlink" title="208.实现 Trie (前缀树)"></a><a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">208.实现 Trie (前缀树)</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">class TrieNode &#123;</span><br><span class="line">    public char val;</span><br><span class="line">    public boolean isWord;</span><br><span class="line">    public TrieNode[] children &#x3D; new TrieNode[26];</span><br><span class="line">    public TrieNode() &#123;&#125;</span><br><span class="line">    TrieNode(char c) &#123;</span><br><span class="line">        this.val &#x3D; c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    private TrieNode root;</span><br><span class="line">    &#x2F;** Initialize your data structure here. *&#x2F;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        this.root &#x3D; new TrieNode(&#39; &#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Inserts a word into the trie. *&#x2F;</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; word.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; word.charAt(i);</span><br><span class="line">            if (wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                wt.children[c - &#39;a&#39;] &#x3D; new TrieNode(c);</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        wt.isWord &#x3D; true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Returns if the word is in the trie. *&#x2F;</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; word.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; word.charAt(i);</span><br><span class="line">            if(wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        return wt.isWord;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Returns if there is any word in the trie that starts with the given prefix. *&#x2F;</span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; prefix.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; prefix.charAt(i);</span><br><span class="line">            if(wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj &#x3D; new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 &#x3D; obj.search(word);</span><br><span class="line"> * boolean param_3 &#x3D; obj.startsWith(prefix);</span><br><span class="line"> *&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h3 id="212-单词搜索-II"><a href="#212-单词搜索-II" class="headerlink" title="212.单词搜索 II"></a><a href="https://leetcode-cn.com/problems/word-search-ii/" target="_blank" rel="noopener">212.单词搜索 II</a></h3><p>1.DFS 暴力搜索 每次都要重新再搜索<br>2.Trie 从每一个枚举起点有一个递归的DFS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    </span><br><span class="line">    Set&lt;String&gt; res &#x3D; new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public List&lt;String&gt; findWords(char[][] board, String[] words) &#123;</span><br><span class="line">        Trie trie &#x3D; new Trie();</span><br><span class="line">        for (String word : words) &#123;</span><br><span class="line">            trie.insert(word);</span><br><span class="line">        &#125;</span><br><span class="line">        int m &#x3D; board.length;</span><br><span class="line">        int n &#x3D; board[0].length;</span><br><span class="line">        boolean[][] visited &#x3D; new boolean[m][n];</span><br><span class="line">        for (int i &#x3D; 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; n; j++) &#123;</span><br><span class="line">                dfs(board, visited, &quot;&quot;, i, j, trie);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ArrayList&lt;String&gt;(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void dfs(char[][] board, boolean[][] visited, String str, int x, int y, Trie trie) &#123;</span><br><span class="line">        if (x &lt; 0 || x &gt;&#x3D; board.length || y &lt; 0 || y &gt;&#x3D; board[0].length)</span><br><span class="line">            return;</span><br><span class="line">        if (visited[x][y])</span><br><span class="line">            return;</span><br><span class="line">        str +&#x3D; board[x][y];</span><br><span class="line">        if (!trie.startsWith(str))</span><br><span class="line">            return;</span><br><span class="line">        if (trie.search(str)) &#123;</span><br><span class="line">            res.add(str);</span><br><span class="line">        &#125;</span><br><span class="line">        visited[x][y] &#x3D; true;</span><br><span class="line">        dfs(board, visited, str, x - 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x + 1, y, trie);</span><br><span class="line">        dfs(board, visited, str, x, y - 1, trie);</span><br><span class="line">        dfs(board, visited, str, x, y + 1, trie);</span><br><span class="line">        visited[x][y] &#x3D; false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TrieNode &#123;</span><br><span class="line">    public char val;</span><br><span class="line">    public boolean isWord;</span><br><span class="line">    public TrieNode[] children &#x3D; new TrieNode[26];</span><br><span class="line">    public TrieNode() &#123;&#125;</span><br><span class="line">    TrieNode(char c) &#123;</span><br><span class="line">        this.val &#x3D; c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    private TrieNode root;</span><br><span class="line">    &#x2F;** Initialize your data structure here. *&#x2F;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        this.root &#x3D; new TrieNode(&#39; &#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Inserts a word into the trie. *&#x2F;</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; word.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; word.charAt(i);</span><br><span class="line">            if (wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                wt.children[c - &#39;a&#39;] &#x3D; new TrieNode(c);</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        wt.isWord &#x3D; true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Returns if the word is in the trie. *&#x2F;</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; word.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; word.charAt(i);</span><br><span class="line">            if(wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        return wt.isWord;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;** Returns if there is any word in the trie that starts with the given prefix. *&#x2F;</span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        TrieNode wt &#x3D; root;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; prefix.length(); i++) &#123;</span><br><span class="line">            char c &#x3D; prefix.charAt(i);</span><br><span class="line">            if(wt.children[c - &#39;a&#39;] &#x3D;&#x3D; null) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            wt &#x3D; wt.children[c - &#39;a&#39;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="79-单词搜索"><a href="#79-单词搜索" class="headerlink" title="79.单词搜索"></a><a href="https://leetcode-cn.com/problems/word-search/" target="_blank" rel="noopener">79.单词搜索</a></h3><p>个别超时 待解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    </span><br><span class="line">    private boolean res &#x3D; false;</span><br><span class="line"></span><br><span class="line">    public boolean exist(char[][] board, String word) &#123;</span><br><span class="line">        int m &#x3D; board.length;</span><br><span class="line">        int n &#x3D; board[0].length;</span><br><span class="line">        boolean[][] visited &#x3D; new boolean[m][n];</span><br><span class="line">        for (int i &#x3D; 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; n; j++) &#123;</span><br><span class="line">                int count &#x3D; -1;</span><br><span class="line">                dfs(board, visited, count, word, i, j);</span><br><span class="line">                if (res &#x3D;&#x3D; true)</span><br><span class="line">                    return res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void dfs(char[][] board, boolean[][] visited, int count, String word, int x, int y) &#123;</span><br><span class="line">        if (x &lt; 0 || x &gt;&#x3D; board.length || y &lt; 0 || y &gt;&#x3D; board[0].length)</span><br><span class="line">            return;</span><br><span class="line">        if (visited[x][y])</span><br><span class="line">            return;</span><br><span class="line">        count +&#x3D; 1;</span><br><span class="line">        if (board[x][y] !&#x3D; word.charAt(count))</span><br><span class="line">            return;</span><br><span class="line">        if (count &#x3D;&#x3D; word.length() - 1) &#123;</span><br><span class="line">            res &#x3D; true;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        visited[x][y] &#x3D; true;</span><br><span class="line">        dfs(board, visited, count, word, x - 1, y);</span><br><span class="line">        dfs(board, visited, count, word, x + 1, y);</span><br><span class="line">        dfs(board, visited, count, word, x, y - 1);</span><br><span class="line">        dfs(board, visited, count, word, x, y + 1);</span><br><span class="line">        visited[x][y] &#x3D; false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#208-实现-Trie-前缀树"><span class="toc-number">1.</span> <span class="toc-text">208.实现 Trie (前缀树)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#212-单词搜索-II"><span class="toc-number">2.</span> <span class="toc-text">212.单词搜索 II</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#79-单词搜索"><span class="toc-number">3.</span> <span class="toc-text">79.单词搜索</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

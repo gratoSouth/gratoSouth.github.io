@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>哈希表 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="HashTable&amp;amp;Hash Function&amp;amp;Collisions哈希函数和哈希碰撞解决原理
+List&amp;amp;Map&amp;amp;Set抽象型数据结构List:链 实现可用数组、链表,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">哈希表</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">哈希表</h1>
+        <div class="stuff">
+            <span>一月 15, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>HashTable&amp;Hash Function&amp;Collisions<br>哈希函数和哈希碰撞解决原理</p>
+<p>List&amp;Map&amp;Set<br>抽象型数据结构<br>List:链 实现可用数组、链表，元素可重复，插入o(1),查找o(n)<br>Map:映射 key-value<br>Set:集合 元素不可重复 实现可用哈希表、二叉树， 查找o(1)或o(logn)</p>
+<p>HashMap、HashSet &amp; TreeMap、TreeSet<br>（hashtable vs binary-search-tree）<br>（查找o(1) vs O(logn)<br>（元素乱序 vs 元素有序）</p>
+<h3 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242.有效的字母异位词"></a><a href="https://leetcode-cn.com/problems/valid-anagram/" target="_blank" rel="noopener">242.有效的字母异位词</a></h3><p>1.排序法O(nlogn)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isAnagram(String s, String t) &#123;</span><br><span class="line">        </span><br><span class="line">        if(s.length() !&#x3D; t.length())</span><br><span class="line">            return false;</span><br><span class="line">        </span><br><span class="line">        char[] str1 &#x3D; s.toCharArray();</span><br><span class="line">        char[] str2 &#x3D; t.toCharArray();</span><br><span class="line">        Arrays.sort(str1);</span><br><span class="line">        Arrays.sort(str2);</span><br><span class="line">        return Arrays.equals(str1, str2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.哈希表法O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isAnagram(String s, String t) &#123;</span><br><span class="line">        </span><br><span class="line">        if(s.length() !&#x3D; t.length())</span><br><span class="line">            return false;</span><br><span class="line">        </span><br><span class="line">        int[] counter &#x3D; new int[26];</span><br><span class="line">        for(int i&#x3D;0; i &lt; s.length(); i++)&#123;</span><br><span class="line">            counter[s.charAt(i) - &#39;a&#39;]++;</span><br><span class="line">            counter[t.charAt(i) - &#39;a&#39;]--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int count : counter)&#123;</span><br><span class="line">            if(count !&#x3D; 0)</span><br><span class="line">                return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1.两数之和"></a><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">1.两数之和</a></h3><p>1.暴力求解 两重循环 O(n^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        if(nums.length &#x3D;&#x3D; 0)</span><br><span class="line">            return new int[] &#123;0, 0&#125;;</span><br><span class="line"></span><br><span class="line">        for(int i &#x3D; 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">            for(int j &#x3D; i + 1; j &lt; nums.length; j++)&#123;</span><br><span class="line">                if(nums[i] + nums[j] &#x3D;&#x3D; target)</span><br><span class="line">                    return new int[] &#123;i, j&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new int[] &#123;0, 0&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.HashMap O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        HashMap&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">        for(int i &#x3D; 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">            int temp &#x3D; target - nums[i];</span><br><span class="line">            if(map.get(temp) !&#x3D; null)&#123;</span><br><span class="line">                return new int[] &#123;map.get(temp), i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        return new int[] &#123;0, 0&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a><a href="https://leetcode-cn.com/problems/3sum/solution/" target="_blank" rel="noopener">15. 三数之和</a></h3><p>1.暴力求解 三重循环 O(n^3)</p>
+<p>2.二重循环+Map O(n^2) 空间O(n)<br>代码有问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">        HashMap&lt;Integer, List&lt;Integer&gt;&gt; map &#x3D; new HashMap&lt;&gt;(); </span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res &#x3D; new LinkedList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        for(int i &#x3D; 0; i &lt; nums.length - 2; i++)&#123;</span><br><span class="line">            if(i &gt; 0 &amp;&amp; nums[i] &#x3D;&#x3D; nums[i - 1]) continue;</span><br><span class="line">            for(int j &#x3D; i + 1; j &lt; nums.length; j++)&#123;</span><br><span class="line">                </span><br><span class="line">                int temp &#x3D; -(nums[i] + nums[j]);</span><br><span class="line">                if(map.get(temp) !&#x3D; null)&#123;</span><br><span class="line">                    List&lt;Integer&gt; li1 &#x3D; map.get(temp);</span><br><span class="line">                    li1.add(nums[j]);</span><br><span class="line">                    res.add(li1);</span><br><span class="line">                &#125;</span><br><span class="line">                else&#123;</span><br><span class="line">                    List&lt;Integer&gt; li2 &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">                    li2.add(nums[i]);</span><br><span class="line">                    li2.add(nums[j]);</span><br><span class="line">                    map.put(temp, li2);</span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.sort find O(n^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">         </span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res &#x3D; new ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        for(int i &#x3D; 0; i &lt; nums.length - 2; i++)&#123;</span><br><span class="line">            if(nums[i] &gt; 0) break;</span><br><span class="line">            if(i &gt; 0 &amp;&amp; nums[i] &#x3D;&#x3D; nums[i-1])</span><br><span class="line">                continue;</span><br><span class="line">            int head &#x3D; i + 1;</span><br><span class="line">            int tail &#x3D; nums.length - 1;</span><br><span class="line">            </span><br><span class="line">            while(head &lt; tail)&#123;</span><br><span class="line">                int sum &#x3D; nums[i] + nums[head] + nums[tail];</span><br><span class="line">                if(sum &lt; 0)&#123;</span><br><span class="line">                    while(head &lt; tail &amp;&amp; nums[head] &#x3D;&#x3D; nums[++head]);</span><br><span class="line">                &#125;else if(sum &gt; 0)&#123;</span><br><span class="line">                    while(head &lt; tail &amp;&amp; nums[tail] &#x3D;&#x3D; nums[--tail]);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    res.add(new ArrayList(Arrays.asList(nums[i], nums[head], nums[tail])));</span><br><span class="line">                    while(head &lt; tail &amp;&amp; nums[head] &#x3D;&#x3D; nums[++head]);</span><br><span class="line">                    while(head &lt; tail &amp;&amp; nums[tail] &#x3D;&#x3D; nums[--tail]);</span><br><span class="line">                &#125;    </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#242-有效的字母异位词"><span class="toc-number">1.</span> <span class="toc-text">242.有效的字母异位词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-两数之和"><span class="toc-number">2.</span> <span class="toc-text">1.两数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-三数之和"><span class="toc-number">3.</span> <span class="toc-text">15. 三数之和</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

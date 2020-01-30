@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>剪枝 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="剪枝1.现实生活中，状态集合非常大，蛮力搜索并不高效2.在分叉时，已经得到了优先级的判断，就找最好的分支即可，把差的分支剪掉
+51.N皇后DFS方法 N层深度
+
+每一层要枚举位置
+判断格子能不能放a,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">剪枝</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">剪枝</h1>
+        <div class="stuff">
+            <span>一月 20, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>剪枝<br>1.现实生活中，状态集合非常大，蛮力搜索并不高效<br>2.在分叉时，已经得到了优先级的判断，就找最好的分支即可，把差的分支剪掉</p>
+<h3 id="51-N皇后"><a href="#51-N皇后" class="headerlink" title="51.N皇后"></a><a href="https://leetcode-cn.com/problems/n-queens/" target="_blank" rel="noopener">51.N皇后</a></h3><p>DFS方法 N层深度</p>
+<ol>
+<li>每一层要枚举位置</li>
+<li>判断格子能不能放<br>a. 暴力再重新找一遍能不能放<br>b. 剪枝： 用一个数组或set缓存把已经存的位置保存下来 时间复杂度降一级 空间换时间</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) &#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; result &#x3D; new LinkedList&lt;&gt;();</span><br><span class="line">        if (n &#x3D;&#x3D; 0)</span><br><span class="line">            return result;</span><br><span class="line">        Set&lt;Integer&gt; pie &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; na &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; col &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        _dfs(0, n, pie, na, col, result, new ArrayList&lt;String&gt;());</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void _dfs(int level, int n, Set&lt;Integer&gt; pie, Set&lt;Integer&gt; na, Set&lt;Integer&gt; col, List&lt;List&lt;String&gt;&gt; results, List&lt;String&gt; tempList) &#123;</span><br><span class="line">        </span><br><span class="line">        if (level &gt; n - 1) &#123;</span><br><span class="line">            List&lt;String&gt; result &#x3D; new ArrayList&lt;&gt;(tempList);</span><br><span class="line">            results.add(result);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; 0; j &lt; n; j++) &#123;</span><br><span class="line">            if (pie.contains(level + j) || na.contains(j - level) || col.contains(j)) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            pie.add(level + j);</span><br><span class="line">            na.add(j - level);</span><br><span class="line">            col.add(j);</span><br><span class="line">            String temp &#x3D; getStr(n, j);</span><br><span class="line">            tempList.add(temp);</span><br><span class="line"></span><br><span class="line">            _dfs(level + 1, n, pie, na, col, results, tempList);</span><br><span class="line"></span><br><span class="line">            pie.remove(level + j);</span><br><span class="line">            na.remove(j - level);</span><br><span class="line">            col.remove(j);</span><br><span class="line">            tempList.remove(temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String getStr(int n, int j) &#123;</span><br><span class="line">        StringBuilder stringBuilder &#x3D; new StringBuilder();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; n; i++) &#123;</span><br><span class="line">            if(i &#x3D;&#x3D; j) &#123;</span><br><span class="line">                stringBuilder.append(&quot;Q&quot;);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                stringBuilder.append(&quot;.&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="52-N皇后-II"><a href="#52-N皇后-II" class="headerlink" title="52.N皇后 II"></a><a href="https://leetcode-cn.com/problems/n-queens-ii" target="_blank" rel="noopener">52.N皇后 II</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    private int sum &#x3D; 0;</span><br><span class="line">    public int totalNQueens(int n) &#123;</span><br><span class="line">        if (n &#x3D;&#x3D; 0)</span><br><span class="line">            return sum;</span><br><span class="line">        Set&lt;Integer&gt; pie &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; na &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; col &#x3D; new HashSet&lt;&gt;();</span><br><span class="line">        _dfs(0, n, pie, na, col);</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void _dfs(int level, int n, Set&lt;Integer&gt; pie, Set&lt;Integer&gt; na, Set&lt;Integer&gt; col) &#123;</span><br><span class="line">        </span><br><span class="line">        if (level &gt; n - 1) &#123;</span><br><span class="line">            sum &#x3D; sum + 1;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; 0; j &lt; n; j++) &#123;</span><br><span class="line">            if (pie.contains(level + j) || na.contains(j - level) || col.contains(j)) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            pie.add(level + j);</span><br><span class="line">            na.add(j - level);</span><br><span class="line">            col.add(j);</span><br><span class="line"></span><br><span class="line">            _dfs(level + 1, n, pie, na, col);</span><br><span class="line"></span><br><span class="line">            pie.remove(level + j);</span><br><span class="line">            na.remove(j - level);</span><br><span class="line">            col.remove(j);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="36-有效的数独"><a href="#36-有效的数独" class="headerlink" title="36. 有效的数独"></a><a href="https://leetcode-cn.com/problems/valid-sudoku/" target="_blank" rel="noopener">36. 有效的数独</a></h3><ol>
+<li>朴素DFS法：<br>DFS（i, j）每个空格 j+1 -&gt; i+1, j=0<br>loop : 1-9<br>check_valid（行、列、小三角块不存在重复的数）</li>
+<li>剪枝 加速<br>a. 从空格少的行、列、小三角块开始<br>b. 预处理 N*N 先扫描一遍棋盘找出空格，列出每个格子可选数，排序后从最少的快开始找<br>c. 高级数据结构 列如：DancingLink、位运算</li>
+</ol>
+<p>朴素DFS法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValidSudoku(char[][] board) &#123;</span><br><span class="line">        if (board &#x3D;&#x3D; null || board.length &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return solve(board);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean solve (char[][] board) &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; board.length; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; board[0].length; j++) &#123;</span><br><span class="line">                if (board[i][j] !&#x3D; &#39;.&#39;) &#123;</span><br><span class="line">                    if (check_valid(board, i, j)) &#123;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        return false;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean check_valid (char[][] board, int row, int col) &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 9; i++) &#123;</span><br><span class="line">            if (board[row][i] !&#x3D; &#39;.&#39; &amp;&amp; i !&#x3D; col &amp;&amp; board[row][i] &#x3D;&#x3D; board[row][col]) return false;</span><br><span class="line">            if (board[i][col] !&#x3D; &#39;.&#39; &amp;&amp; i !&#x3D; row &amp;&amp; board[i][col] &#x3D;&#x3D; board[row][col]) return false;</span><br><span class="line">            if (board[3 * (row&#x2F;3) + i&#x2F;3][3 * (col&#x2F;3) + i%3] !&#x3D; &#39;.&#39; &amp;&amp; (3 * (row&#x2F;3) + i&#x2F;3 !&#x3D; row || 3 * (col&#x2F;3) + i%3 !&#x3D; col) &amp;&amp; board[3 * (row&#x2F;3) + i&#x2F;3][3 * (col&#x2F;3) + i%3] &#x3D;&#x3D; board[row][col]) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="37-解数独"><a href="#37-解数独" class="headerlink" title="37.解数独"></a><a href="https://leetcode-cn.com/problems/sudoku-solver/" target="_blank" rel="noopener">37.解数独</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void solveSudoku(char[][] board) &#123;</span><br><span class="line">        if (board &#x3D;&#x3D; null || board.length &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        solve(board);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean solve (char[][] board) &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; board.length; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; board[0].length; j++) &#123;</span><br><span class="line">                if (board[i][j] &#x3D;&#x3D; &#39;.&#39;) &#123;</span><br><span class="line">                    for (char c &#x3D; &#39;1&#39;; c &lt;&#x3D; &#39;9&#39;; c++) &#123;</span><br><span class="line">                        if (check_valid(board, i, j, c)) &#123;</span><br><span class="line">                            board[i][j] &#x3D; c;</span><br><span class="line">                            if (solve(board)) &#123;</span><br><span class="line">                                return true;</span><br><span class="line">                            &#125; else &#123;</span><br><span class="line">                                board[i][j] &#x3D; &#39;.&#39;;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean check_valid (char[][] board, int row, int col, char c) &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 9; i++) &#123;</span><br><span class="line">            if (board[row][i] !&#x3D; &#39;.&#39; &amp;&amp; board[row][i] &#x3D;&#x3D; c) return false;</span><br><span class="line">            if (board[i][col] !&#x3D; &#39;.&#39; &amp;&amp; board[i][col] &#x3D;&#x3D; c) return false;</span><br><span class="line">            if (board[3 * (row&#x2F;3) + i&#x2F;3][3 * (col&#x2F;3) + i%3] !&#x3D; &#39;.&#39; &amp;&amp; board[3 * (row&#x2F;3) + i&#x2F;3][3 * (col&#x2F;3) + i%3] &#x3D;&#x3D; c) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-N皇后"><span class="toc-number">1.</span> <span class="toc-text">51.N皇后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-N皇后-II"><span class="toc-number">2.</span> <span class="toc-text">52.N皇后 II</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-有效的数独"><span class="toc-number">3.</span> <span class="toc-text">36. 有效的数独</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-解数独"><span class="toc-number">4.</span> <span class="toc-text">37.解数独</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
