@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>动态规划 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="动态规划300.最长上升子序列1.暴力递归+剪枝 o(2^n)
+2.存在最优子结构 即前面已枚举的值的已有最长子序列 DP法 o(n^2)
+
+DP状态的定义DP[i] 从0-&amp;gt;i的最长子序列长,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">动态规划</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">动态规划</h1>
+        <div class="stuff">
+            <span>二月 04, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="300-最长上升子序列"><a href="#300-最长上升子序列" class="headerlink" title="300.最长上升子序列"></a><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">300.最长上升子序列</a></h2><p>1.暴力递归+剪枝 o(2^n)</p>
+<p>2.存在最优子结构 即前面已枚举的值的已有最长子序列 DP法 o(n^2)</p>
+<ol>
+<li>DP状态的定义<br>DP[i] 从0-&gt;i的最长子序列长度</li>
+<li>DP方程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i : 0 -&gt; n-1:</span><br><span class="line">	for j : 0 -&gt; i-1</span><br><span class="line">		DP[i] &#x3D; max(DP[j]) + 1(注：a[j] &lt; a[i])</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLIS(int[] nums) &#123;</span><br><span class="line">        if (nums &#x3D;&#x3D; null || nums.length &#x3D;&#x3D; 0)</span><br><span class="line">            return 0;</span><br><span class="line">        </span><br><span class="line">        int res &#x3D; 1;</span><br><span class="line">        int[] dp &#x3D; new int[nums.length];</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; nums.length; i++)</span><br><span class="line">            dp[i] &#x3D; 1;</span><br><span class="line">        </span><br><span class="line">        for (int i &#x3D; 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; i; j++) &#123;</span><br><span class="line">                if (nums[j] &lt; nums[i]) &#123;</span><br><span class="line">                    dp[i] &#x3D; Math.max(dp[i], dp[j] + 1);</span><br><span class="line">                &#125;</span><br><span class="line">                res &#x3D; Math.max(res, dp[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.二分查找法 o(nlogn)</p>
+<ol>
+<li>维护一个最长上升序列数组：LIS</li>
+<li>for i : 0 -&gt; n-1:<br>插入到LIS，后插入数值比已有数组最后一个值小需要替换已有数组中的第一个比他大的值，用二分查找该值，起到了加速作用</li>
+<li>最后结果LIS.size()</li>
+</ol>
+<p>注意：Arrays.binarySearch（）如果要搜索的元素key在指定的范围内，则返回搜索键的索引；否则返回-1或者”-“(插入点)。</p>
+<p>1.该搜索键在范围内，但不在数组中，由1开始计数；<br>2.该搜索键在范围内，且在数组中，由0开始计数；<br>3.该搜索键不在范围内，且小于范围内元素，由1开始计数；<br>4.该搜索键不在范围内，且大于范围内元素，返回-(endIndex + 1);（特列）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLIS(int[] nums) &#123;</span><br><span class="line">        if (nums &#x3D;&#x3D; null || nums.length &#x3D;&#x3D; 0)</span><br><span class="line">            return 0;</span><br><span class="line">        int len &#x3D; 0;</span><br><span class="line">        int[] lis &#x3D; new int[nums.length];</span><br><span class="line">        for (int num : nums) &#123;</span><br><span class="line">            int i &#x3D; Arrays.binarySearch(lis, 0, len, num);</span><br><span class="line">            if (i &lt; 0) &#123;</span><br><span class="line">                i &#x3D; -(i + 1);</span><br><span class="line">            &#125;</span><br><span class="line">            lis[i] &#x3D; num;</span><br><span class="line">            if (i &#x3D;&#x3D; len) &#123;</span><br><span class="line">                len++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="72-编辑距离"><a href="#72-编辑距离" class="headerlink" title="72.编辑距离"></a><a href="https://leetcode-cn.com/problems/edit-distance/" target="_blank" rel="noopener">72.编辑距离</a></h2><p>1.暴力dfs bfs<br>2.DP o(m*n)</p>
+<ol>
+<li>DP状态的定义<br>DP[i] [j] 表示word1前i个字符匹配word2前j个的最小步数</li>
+<li>DP方程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">w1[], w2[] </span><br><span class="line">for i &#x3D; 0 -&gt; m</span><br><span class="line">	for j &#x3D; 0 -&gt; n:</span><br><span class="line">DP[i][j] &#x3D; </span><br><span class="line">if w1[i] &#x3D; w2[j] : DP[i-1][j-1]</span><br><span class="line">else : &#x2F;&#x2F;Insert, Delete, Replace</span><br><span class="line">Min(DP[i-1][j], DP[i][j-1], DP[i-1][j-1]) + 1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        if (word1 &#x3D;&#x3D; &quot;&quot; || word2 &#x3D;&#x3D; &quot;&quot;)</span><br><span class="line">            return 0;</span><br><span class="line">        int m &#x3D; word1.length();</span><br><span class="line">        int n &#x3D; word2.length();</span><br><span class="line">        int[][] dp &#x3D; new int[m + 1][n + 1];</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; m + 1; i++) &#123;</span><br><span class="line">            dp[i][0] &#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; n + 1; j++) &#123;</span><br><span class="line">            dp[0][j] &#x3D; j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; m; i++) &#123;</span><br><span class="line">            for(int j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;</span><br><span class="line">                if (word1.charAt(i - 1) &#x3D;&#x3D; word2.charAt(j - 1)) &#123;</span><br><span class="line">                    dp[i][j] &#x3D; dp[i - 1][j - 1];</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                    dp[i][j] &#x3D; Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322.零钱兑换"></a><a href="https://leetcode-cn.com/problems/coin-change/" target="_blank" rel="noopener">322.零钱兑换</a></h2><p>跟爬楼梯相似<br>1.暴力dfs递归 o(2^n)<br>2.贪心不行<br>3.DP o(x*n)</p>
+<ol>
+<li>DP状态的定义<br>DP[i] i面额最少硬币数</li>
+<li>DP方程<br>DP[i] = min({DP[i - coin[j]]}) + 1</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int coinChange(int[] coins, int amount) &#123;</span><br><span class="line">        int[] dp &#x3D; new int[amount + 1];</span><br><span class="line">        dp[0] &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; amount; i++)</span><br><span class="line">            dp[i] &#x3D; amount + 1;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; amount; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; coins.length; j++) &#123;</span><br><span class="line">                if (coins[j] &lt;&#x3D; i)</span><br><span class="line">                    dp[i] &#x3D; Math.min(dp[i], dp[i - coins[j]] + 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[amount] &gt; amount ? -1 : dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="股票买卖系列问题"><a href="#股票买卖系列问题" class="headerlink" title="股票买卖系列问题"></a>股票买卖系列问题</h2><p>通用DP：o(n*k)</p>
+<ol>
+<li>DP状态的定义<br>MP[i, k, j]: 表示到i天的最大利润<br>i: 范围（0-n-1）时间维度 表示具体哪一 天<br>k: 范围（0-k）表示之前交易了多少次（在cooldown题中，k：范围（0、1）0表示可以交易状态 1表示不能交易状态）<br>j: 范围（0、1）0表示不拥有股票 1表示拥有股票</li>
+<li>DP方程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for i: 0-&gt;n-1:</span><br><span class="line">	for k: 0-&gt;k:</span><br><span class="line">MP[i, k, 0] &#x3D; max(MP[i-1, k, 0], MP[i-1, k-1, 1] + a[i]&#x2F;&#x2F;卖出)</span><br><span class="line">MP[i, k, 1] &#x3D; max(MP[i-1, k, 1], MP[i-1, k, 0] - a[i]&#x2F;&#x2F;买入)</span><br><span class="line">最后结果为MP[n-1, &#123;0,...,k&#125;, 0]最大值</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>公共解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int k, int[] prices) &#123;</span><br><span class="line">        </span><br><span class="line">        if (prices &#x3D;&#x3D; null || prices.length &#x3D;&#x3D; 0)</span><br><span class="line">            return 0;</span><br><span class="line"></span><br><span class="line">        &#x2F;**</span><br><span class="line">         当k大于等于数组长度一半时, 问题退化为贪心问题此时采用 买卖股票的最佳时机 II</span><br><span class="line">         的贪心方法解决可以大幅提升时间性能，如果不用这个贪心，有个testCase过不去，会报空间超</span><br><span class="line">         限</span><br><span class="line">         *&#x2F;</span><br><span class="line">        if(k &gt;&#x3D; prices.length &#x2F; 2)</span><br><span class="line">            return greedy(prices);</span><br><span class="line">        </span><br><span class="line">        int[][][] mp &#x3D; new int[prices.length][k + 1][2];</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt;&#x3D; k; i++) &#123;</span><br><span class="line">            &#x2F;&#x2F; 可看为第1天买入-卖出循环K次之后不再买入，所以初始值为 0</span><br><span class="line">            mp[0][i][0] &#x3D; 0;</span><br><span class="line">            &#x2F;&#x2F; 可看为第1天买入-卖出循环K次之后又买入，所以初始值为 -prices[0]</span><br><span class="line">            mp[0][i][1] &#x3D; -prices[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt;&#x3D; k; j++) &#123;</span><br><span class="line">                &#x2F;&#x2F;注意0 - 1 &#x3D; -1 数组越界</span><br><span class="line">                mp[i][j][0] &#x3D; j !&#x3D; 0 ? Math.max(mp[i - 1][j][0], mp[i - 1][j - 1][1] + prices[i]) : mp[i - 1][j][0];</span><br><span class="line">                mp[i][j][1] &#x3D; Math.max(mp[i - 1][j][1], mp[i - 1][j][0] - prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int max &#x3D; Integer.MIN_VALUE;</span><br><span class="line">        for (int i &#x3D; 0; i &lt;&#x3D; k; i++) &#123;</span><br><span class="line">            max &#x3D; Math.max(max, mp[prices.length - 1][i][0]);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int greedy(int[] prices) &#123;</span><br><span class="line">        int max &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt; prices.length; ++i) &#123;</span><br><span class="line">            if(prices[i] &gt; prices[i-1])</span><br><span class="line">                max +&#x3D; prices[i] - prices[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121.买卖股票的最佳时机"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121.买卖股票的最佳时机</a></h3><p><strong>只能买卖一次</strong></p>
+<p>1.一次循环记录最小值用后一个数与最小值相减记录结果最大值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        if (prices &#x3D;&#x3D; null || prices.length &#x3D;&#x3D; 0)</span><br><span class="line">            return 0;</span><br><span class="line">        int min &#x3D; prices[0];</span><br><span class="line">        int res &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">            if (prices[i] &lt; min) &#123;</span><br><span class="line">                min &#x3D; prices[i];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                res &#x3D; Math.max(res, prices[i] - min);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="122-买卖股票的最佳时机-II"><a href="#122-买卖股票的最佳时机-II" class="headerlink" title="122.买卖股票的最佳时机 II"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">122.买卖股票的最佳时机 II</a></h3><p><strong>买卖无数次</strong></p>
+<p>1.循环一次把后一天价格比前一天价格高的结果累加起来得到结果<br>贪心法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        int sum &#x3D; 0;</span><br><span class="line">        for(int i &#x3D; 0; i &lt; prices.length - 1; i++)&#123;</span><br><span class="line">            if(prices[i] &lt; prices[i + 1])&#123;</span><br><span class="line">                sum &#x3D; sum + (prices[i + 1] - prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="123-买卖股票的最佳时机-III"><a href="#123-买卖股票的最佳时机-III" class="headerlink" title="123.买卖股票的最佳时机 III"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">123.买卖股票的最佳时机 III</a></h3><p><strong>只能买卖两次</strong><br>公共</p>
+<h3 id="188-买卖股票的最佳时机-IV"><a href="#188-买卖股票的最佳时机-IV" class="headerlink" title="188.买卖股票的最佳时机 IV"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">188.买卖股票的最佳时机 IV</a></h3><p><strong>买卖k次</strong></p>
+<h3 id="309-最佳买卖股票时机含冷冻期"><a href="#309-最佳买卖股票时机含冷冻期" class="headerlink" title="309.最佳买卖股票时机含冷冻期"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">309.最佳买卖股票时机含冷冻期</a></h3><p><strong>有冷却期一天</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://q4xe4nmw6.bkt.clouddn.com/水月陵 - Summer Pockets.flac'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态规划"><span class="toc-number">1.</span> <span class="toc-text">动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#300-最长上升子序列"><span class="toc-number">1.1.</span> <span class="toc-text">300.最长上升子序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#72-编辑距离"><span class="toc-number">1.2.</span> <span class="toc-text">72.编辑距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#322-零钱兑换"><span class="toc-number">1.3.</span> <span class="toc-text">322.零钱兑换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#股票买卖系列问题"><span class="toc-number">1.4.</span> <span class="toc-text">股票买卖系列问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#121-买卖股票的最佳时机"><span class="toc-number">1.4.1.</span> <span class="toc-text">121.买卖股票的最佳时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#122-买卖股票的最佳时机-II"><span class="toc-number">1.4.2.</span> <span class="toc-text">122.买卖股票的最佳时机 II</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#123-买卖股票的最佳时机-III"><span class="toc-number">1.4.3.</span> <span class="toc-text">123.买卖股票的最佳时机 III</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#188-买卖股票的最佳时机-IV"><span class="toc-number">1.4.4.</span> <span class="toc-text">188.买卖股票的最佳时机 IV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#309-最佳买卖股票时机含冷冻期"><span class="toc-number">1.4.5.</span> <span class="toc-text">309.最佳买卖股票时机含冷冻期</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
