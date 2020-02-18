@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>py多线程编程 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="多线程编程多线程编程定义123456789101112131415import threadingimport timefrom threading import current_threaddef,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">py多线程编程</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">py多线程编程</h1>
+        <div class="stuff">
+            <span>二月 15, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h2><h3 id="多线程编程定义"><a href="#多线程编程定义" class="headerlink" title="多线程编程定义"></a>多线程编程定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line">from threading import current_thread</span><br><span class="line"></span><br><span class="line">def myThread(arg1, arg2):</span><br><span class="line">	print(current_thread().getName(), &#39;start&#39;)</span><br><span class="line">	print(&#39;%s %s&#39; %(arg1, arg2))</span><br><span class="line">	time.sleep(1)</span><br><span class="line">	print(current_thread().getName(), &#39;stop&#39;)</span><br><span class="line"></span><br><span class="line">for i in range(1, 6, 1):</span><br><span class="line">	t1 &#x3D; threading.Thread(target &#x3D; myThread, args &#x3D; (i, i + 1))</span><br><span class="line">	t1.start()</span><br><span class="line"></span><br><span class="line">print(current_thread().getName(), &#39;end&#39;)</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Thread-1 start</span><br><span class="line">1 2</span><br><span class="line">Thread-2 start</span><br><span class="line">2 3</span><br><span class="line">Thread-3 start</span><br><span class="line">3 4</span><br><span class="line">Thread-4 start</span><br><span class="line">4 5</span><br><span class="line">Thread-5 start</span><br><span class="line">5 6</span><br><span class="line">MainTread end</span><br><span class="line">Thread-1 stop</span><br><span class="line">Thread-2 stop</span><br><span class="line">Thread-3 stop</span><br><span class="line">Thread-5 stop</span><br><span class="line">Thread-4 stop</span><br></pre></td></tr></table></figure>
+
+<p>线程同步<br>线程之间的依赖关系 有一个线程的运行等待另一个线程的结束<br>主线程最后等待子线程结束后才结束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">from threading import current_thread</span><br><span class="line"></span><br><span class="line">class Mythread(threading.Thread):</span><br><span class="line">	def run(self): # 线程启动start()调用run()</span><br><span class="line">		print(current_thread().getName(), &#39;start&#39;)</span><br><span class="line">		print(&#39;run&#39;)</span><br><span class="line">		print(current_thread().getName(), &#39;end&#39;)</span><br><span class="line"></span><br><span class="line">t1 &#x3D; Mythread()</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() # 主线程后结束</span><br><span class="line"></span><br><span class="line">print(current_thread().getName(), &#39;end&#39;)</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread-1 start</span><br><span class="line">run</span><br><span class="line">Thread-1 stop</span><br><span class="line">MainTread end</span><br></pre></td></tr></table></figure>
+
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>while 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while 表达式: </span><br><span class="line">	代码块</span><br></pre></td></tr></table></figure>
+
+<p>for 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for 迭代变量 in 可迭代对象: </span><br><span class="line">	代码块</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 输出2000-2018</span><br><span class="line">for year in range(2000, 2019):</span><br><span class="line">	print(&#39;%s年&#39; %(year))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">from threading import Thread,current_thread</span><br><span class="line">import time</span><br><span class="line">import random</span><br><span class="line">from queue import Queue</span><br><span class="line"></span><br><span class="line"># 处理多线程之间的同步，经常使用队列来同步不同线程之间的数据</span><br><span class="line">queue &#x3D; Queue(5) # 控制产生数据的多少</span><br><span class="line"></span><br><span class="line">class ProducerThread(Thread):</span><br><span class="line">    def run(self):</span><br><span class="line">        name &#x3D; current_thread().getName()</span><br><span class="line">        nums &#x3D; range(100)</span><br><span class="line">        global queue</span><br><span class="line">        while True:</span><br><span class="line">            num &#x3D; random.choice(nums)</span><br><span class="line">            queue.put(num)</span><br><span class="line">            print(&#39;生产者 %s 生产了数据 %s&#39; %(name, num))</span><br><span class="line">            t &#x3D; random.randint(1,3)</span><br><span class="line">            time.sleep(t)</span><br><span class="line">            print(&#39;生产者 %s 睡眠了 %s 秒&#39; %(name, t))</span><br><span class="line"></span><br><span class="line">class ConsumerTheard(Thread):</span><br><span class="line">    def run(self):</span><br><span class="line">        name &#x3D; current_thread().getName()</span><br><span class="line">        global queue</span><br><span class="line">        while True:</span><br><span class="line">            # 封装好了线程等待和线程同步的代码</span><br><span class="line">			num &#x3D; queue.get() </span><br><span class="line">            queue.task_done()</span><br><span class="line">            print(&#39;消费者 %s 消耗了数据 %s&#39; %(name, num))</span><br><span class="line">            t &#x3D; random.randint(1,5)</span><br><span class="line">            time.sleep(t)</span><br><span class="line">            print(&#39;消费者 %s 睡眠了 %s 秒&#39; % (name, t))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p1 &#x3D; ProducerThread(name &#x3D; &#39;p1&#39;)</span><br><span class="line">p1.start()</span><br><span class="line">p2 &#x3D; ProducerThread(name &#x3D; &#39;p2&#39;)</span><br><span class="line">p2.start()</span><br><span class="line">p3 &#x3D; ProducerThread(name &#x3D; &#39;p3&#39;)</span><br><span class="line">p3.start()</span><br><span class="line">c1 &#x3D; ConsumerTheard(name &#x3D; &#39;c1&#39;)</span><br><span class="line">c1.start()</span><br><span class="line">c2 &#x3D; ConsumerTheard(name &#x3D; &#39;c2&#39;)</span><br><span class="line">c2.start()</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://q4xe4nmw6.bkt.clouddn.com/水月陵 - Summer Pockets.flac'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程编程"><span class="toc-number">1.</span> <span class="toc-text">多线程编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程编程定义"><span class="toc-number">1.1.</span> <span class="toc-text">多线程编程定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环语句"><span class="toc-number">1.2.</span> <span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产者消费者问题"><span class="toc-number">1.3.</span> <span class="toc-text">生产者消费者问题</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

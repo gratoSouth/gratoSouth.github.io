@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>py函数 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="函数函数的定义123def 函数名称(): 	代码 	return 需要返回的内容
+
+函数的调用1函数名称()
+传参数时需要顺序传入，若要跳过，则需要用关键字传参数运用关键字传参可以忽略顺序，还能明,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">py函数</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">py函数</h1>
+        <div class="stuff">
+            <span>二月 13, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def 函数名称(): </span><br><span class="line">	代码 </span><br><span class="line">	return 需要返回的内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名称()</span><br></pre></td></tr></table></figure>
+<p>传参数时需要顺序传入，若要跳过，则需要用关键字传参数<br>运用关键字传参可以忽略顺序，还能明确意义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&#39;abc&#39;, end&#x3D;&#39;\n&#39;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数的可变长参数"><a href="#函数的可变长参数" class="headerlink" title="函数的可变长参数"></a>函数的可变长参数</h3><p>在定义函数参数时，定义可选的参数在其前面加一个*号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 取得参数的个数</span><br><span class="line">def howlong(first, *other):</span><br><span class="line">	print(1 + len(other))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="函数的变量作用域"><a href="#函数的变量作用域" class="headerlink" title="函数的变量作用域"></a>函数的变量作用域</h3><p>内层覆盖外层，内层不作用于外层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var1 &#x3D; 123</span><br><span class="line">def func():</span><br><span class="line">	var1 &#x3D; 456</span><br><span class="line">	print(var1)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">print(var1)</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">456</span><br><span class="line">123</span><br></pre></td></tr></table></figure>
+
+<p>内层修改后对外层产生影响，加global关键字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var1 &#x3D; 123</span><br><span class="line">def func():</span><br><span class="line">	global var1</span><br><span class="line">	var1 &#x3D; 456</span><br><span class="line">	print(var1)</span><br><span class="line"></span><br><span class="line">func()</span><br><span class="line">print(var1)</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">456</span><br><span class="line">456</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数的迭代器与生成器"><a href="#函数的迭代器与生成器" class="headerlink" title="函数的迭代器与生成器"></a>函数的迭代器与生成器</h3><p>通常一个函数返回执行结果使用的是return关键字，但是在实际使用中发现如果函数返回的内容非常多而且是按顺序每次只使用一个元素的话，我们需要把结果再处理成可迭代对象，例如返回一个列表，我们要使用for..in…的形式再对返回结果做处理，这时候可以使用yield关键字来返回，有效的避免了一次返回数据过多，占用较多内存的问题。这就是为什么有了return还要产生yield的原因了。这里还有一些注意事项，使用yield关键字的函数叫做生成器，他返回的结果是可迭代对象，只能读取一次。</p>
+<p>迭代器中有两个最基本的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># iter() next()</span><br><span class="line">list1 &#x3D; [1, 2, 3]</span><br><span class="line">it &#x3D; iter(list1)</span><br><span class="line">print(next(it))</span><br><span class="line">print(next(it))</span><br><span class="line">print(next(it))</span><br><span class="line">print(next(it)) # except</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StopIteration</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>实现自定义的迭代器需要用到yield关键字<br>带yield的函数叫做生成器-迭代器的一种</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def frange(start, stop, step):</span><br><span class="line">	x &#x3D; start</span><br><span class="line">	while x &lt; stop:</span><br><span class="line">		yield x # 暂停并且记录位置</span><br><span class="line">		x +&#x3D; step</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>函数写成匿名函数形式</p>
+<p>可以把lambda当作是个连函数名、函数定义都省略的函数调用就可以了，例如你需要使用函数这种形式，而函数内容又很简单，就没有必要为函数起一个标准又冗长的名字，甚至去定义这个函数，直接换成lambda拿去用就好了。</p>
+<p>如需要定义一个函数输入两个参数返回两个参数的和，函数和lambda的写法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 定义</span><br><span class="line">def add(x,y):</span><br><span class="line">    return x+y</span><br><span class="line"></span><br><span class="line"># 调用</span><br><span class="line">print(add(5,6))</span><br><span class="line"></span><br><span class="line">#lambda 写法</span><br><span class="line">add2 &#x3D; lambda x, y : x+y</span><br><span class="line">print(add2(5,6))</span><br></pre></td></tr></table></figure>
+
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>外部函数中的变量被内部函数引用就叫闭包</p>
+<p>闭包与函数的区别：</p>
+<ol>
+<li>由传递变量的方式变成了传递函数的方式</li>
+<li>使用闭包的时候比使用函数的时候调用的参数少</li>
+<li>代码更优雅</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 普通函数</span><br><span class="line">def func():</span><br><span class="line">	a &#x3D; 1</span><br><span class="line">	b &#x3D; 2</span><br><span class="line">	return a + b</span><br><span class="line"></span><br><span class="line"># 闭包</span><br><span class="line">def sum(a):</span><br><span class="line">	def add(b):</span><br><span class="line">		return a + b</span><br><span class="line"></span><br><span class="line">	return add</span><br><span class="line"></span><br><span class="line"># add 函数名称或函数的引用</span><br><span class="line"># add() 函数的调用</span><br><span class="line"></span><br><span class="line">num1 &#x3D; func()</span><br><span class="line">num2 &#x3D; sum(2)</span><br><span class="line"></span><br><span class="line">print(type(num1))</span><br><span class="line">print(type(num2))</span><br><span class="line">print(num2(4))</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;int&#39;&gt;</span><br><span class="line">&lt;class &#39;function&#39;&gt;</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+<p>用闭包的方式实现计数器的功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def counter():</span><br><span class="line">	cnt &#x3D; [0]</span><br><span class="line">	def add_one():</span><br><span class="line">		cnt[0] +&#x3D; 1</span><br><span class="line">		return cnt[0]</span><br><span class="line"></span><br><span class="line">	return add_one</span><br><span class="line"></span><br><span class="line">num1 &#x3D; counter()</span><br><span class="line">print(num1)</span><br><span class="line">print(num1())</span><br><span class="line">print(num1())</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;function counter.&lt;locals&gt;.add_one&gt;</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>传入参数改进后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def counter(FIRST &#x3D; 0):</span><br><span class="line">	cnt &#x3D; [FIRST]</span><br><span class="line">	def add_one():</span><br><span class="line">		cnt[0] +&#x3D; 1</span><br><span class="line">		return cnt[0]</span><br><span class="line"></span><br><span class="line">	return add_one</span><br><span class="line"></span><br><span class="line">num5 &#x3D; counter(5) # 从5开始计数</span><br><span class="line">num10 &#x3D; counter(10) # 从10开始计数</span><br><span class="line">print(num5())</span><br><span class="line">print(num10())</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">11</span><br></pre></td></tr></table></figure>
+
+<p>闭包的另一个应用例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># a * x + b &#x3D; y</span><br><span class="line"></span><br><span class="line">def a_line(a, b):</span><br><span class="line">	def arg_y(x):</span><br><span class="line">		return a * x + b</span><br><span class="line">	return arg_y</span><br><span class="line"></span><br><span class="line"># lambda表达式简写</span><br><span class="line"># def a_line(a, b):</span><br><span class="line"># 	  return lambda x : a * x + b</span><br><span class="line"></span><br><span class="line"># a &#x3D; 5 b &#x3D; 5</span><br><span class="line"># x &#x3D; 10 y &#x3D; ?</span><br><span class="line"># x &#x3D; 20 y &#x3D; ?</span><br><span class="line"></span><br><span class="line">line1 &#x3D; a_line(3, 5)</span><br><span class="line">print(line1(10))</span><br><span class="line">print(line1(20))</span><br><span class="line"></span><br><span class="line"># 普通函数写法</span><br><span class="line"># def func1(a, b, x)</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">35</span><br><span class="line">65</span><br></pre></td></tr></table></figure>
+
+<h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3><p>不用重复编写修饰代码<br>装饰器代码复用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 类似闭包写法</span><br><span class="line">def timmer(func): # 传入函数</span><br><span class="line">	def wrapper():</span><br><span class="line">		start_time &#x3D; time.time()</span><br><span class="line">		func()    # 内部引用的也是函数</span><br><span class="line">		stop_time &#x3D; time.time()</span><br><span class="line">		print(&quot;运行时间是 %s 秒&quot; %(stop_time - start_time))</span><br><span class="line">	return wrapper</span><br><span class="line"></span><br><span class="line">@timmer #语法糖 timmer称作装饰器中的装饰函数</span><br><span class="line">def i_can_sleep(): #被装饰函数</span><br><span class="line">	time.sleep()</span><br><span class="line"></span><br><span class="line">i_can_sleep()</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行时间是 3 秒</span><br></pre></td></tr></table></figure>
+
+<p>装饰器执行过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num &#x3D; timmer(i_can_sleep())</span><br><span class="line">num()</span><br></pre></td></tr></table></figure>
+
+<p>对带参数的函数增加装饰器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def tips(func):</span><br><span class="line">	def nei(a, b):</span><br><span class="line">		print(&#39;start&#39;)</span><br><span class="line">		func(a, b)</span><br><span class="line">		print(&#39;stop&#39;)</span><br><span class="line">	return nei</span><br><span class="line"></span><br><span class="line">@tips</span><br><span class="line">def add(a, b):</span><br><span class="line">	print(a + b)</span><br><span class="line"></span><br><span class="line">print(add(4, 5))</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start</span><br><span class="line">9</span><br><span class="line">stop</span><br></pre></td></tr></table></figure>
+
+<p>装饰器带参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def new_tips(argv):</span><br><span class="line">	def tips(func):</span><br><span class="line">		def nei(a, b):</span><br><span class="line">			print(&#39;start %s %s&#39; %(argv, func.__name__))</span><br><span class="line">			func(a, b)</span><br><span class="line">			print(&#39;stop&#39;)</span><br><span class="line">		return nei</span><br><span class="line">	return tips</span><br><span class="line"></span><br><span class="line">@new_tips(&#39;add_module&#39;)</span><br><span class="line">def add(a, b):</span><br><span class="line">	print(a + b)</span><br><span class="line"></span><br><span class="line">@new_tips(&#39;sub_module&#39;)</span><br><span class="line">def sub(a, b):</span><br><span class="line">	print(a - b)</span><br><span class="line"></span><br><span class="line">print(add(4, 5))</span><br><span class="line">print(sub(7, 3))</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start add_module add</span><br><span class="line">9</span><br><span class="line">stop</span><br><span class="line"></span><br><span class="line">start sub_module sub</span><br><span class="line">4</span><br><span class="line">stop</span><br></pre></td></tr></table></figure>
+
+<h3 id="上下文管理器"><a href="#上下文管理器" class="headerlink" title="上下文管理器"></a>上下文管理器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fd &#x3D; open(&#39;name.txt&#39;)</span><br><span class="line">try:</span><br><span class="line">	for line in fd:</span><br><span class="line">		print(line)</span><br><span class="line">finally:</span><br><span class="line">	fd.close()</span><br></pre></td></tr></table></figure>
+
+<p>精简为上下文管理器写法<br>当出现异常时自动调用finally关闭文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with open(&#39;name.txt&#39;) as f:</span><br><span class="line">	for line in f:</span><br><span class="line">		print(line)</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://q4xe4nmw6.bkt.clouddn.com/水月陵 - Summer Pockets.flac'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class='side'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的定义"><span class="toc-number">1.1.</span> <span class="toc-text">函数的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的调用"><span class="toc-number">1.2.</span> <span class="toc-text">函数的调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的可变长参数"><span class="toc-number">1.3.</span> <span class="toc-text">函数的可变长参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的变量作用域"><span class="toc-number">1.4.</span> <span class="toc-text">函数的变量作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的迭代器与生成器"><span class="toc-number">1.5.</span> <span class="toc-text">函数的迭代器与生成器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-number">1.6.</span> <span class="toc-text">Lambda表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.7.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#装饰器"><span class="toc-number">1.8.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上下文管理器"><span class="toc-number">1.9.</span> <span class="toc-text">上下文管理器</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
